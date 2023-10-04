@@ -16,9 +16,11 @@ public class Avion{
     @Column(name="capacidad_avion", nullable = false)
     private Integer capacidad_avion;
 
-    //Clave foranea tabla aerolinea
+    @ManyToOne
+    @JoinColumn(name = "id_aerolinea", nullable=false)
     private Aerolinea aerolinea;
 
+    
     public Avion(){}
     public Avion (String modelo_avion, Integer capacidad_avion, Aerolinea aerolinea){
         this.modelo_avion = modelo_avion;

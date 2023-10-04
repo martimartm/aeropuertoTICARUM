@@ -10,10 +10,12 @@ public class Vuelo{
     @Column(name="id_vuelo", nullable = false)
     private Long id_vuelo;
 
-    //Clave foranea tabla aerolinea
+    @ManyToOne
+    @JoinColumn(name = "id_aerolinea")
     private Aerolinea aerolinea;
 
-    //Clave foranea tabla avion
+    @ManyToOne
+    @JoinColumn(name = "id_avion")
     private Avion avion;
 
     public Vuelo(Avion avion){
