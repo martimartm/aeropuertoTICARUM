@@ -11,19 +11,24 @@ public class Aerolinea {
     @Column(name="id_aerolinea", nullable = false)
     private Long id_aerolinea;
 
-    @Column(name="name_aerolinea", nullable = false, unique = true)
-    private String name_aerolinea;
+    @Column(name = "name", nullable = false, unique = true)
+    private String name;
 
-    @Formula("SELECT COUNT(*) FROM Avion x WHERE x.id_aerolinea = id_aerolinea")
+    @Column
+    @Formula("SELECT COUNT(*) FROM Avion WHERE id_aerolinea = id_aerolinea")
     private Long count_aviones;
 
 
-    public Aerolinea(){}
-    public Aerolinea (String name_aerolinea ){
-        this.name_aerolinea=name_aerolinea;
+    public Aerolinea(){
+
     }
 
-    
+    public Aerolinea (Long id_aerolinea, String name, Long count_aviones ){
+        this.id_aerolinea = id_aerolinea;
+        this.name=name;
+        this.count_aviones = count_aviones;
+    }
+
     public Long getId_aerolinea() {
         return id_aerolinea;
     }
@@ -31,11 +36,9 @@ public class Aerolinea {
         this.id_aerolinea = id_aerolinea;
     }
     public String getName_aerolinea() {
-        return name_aerolinea;
+        return name;
     }
-    public void setName_aerolinea(String name_aerolinea) {
-        this.name_aerolinea = name_aerolinea;
-    }
+
     public Long getCount_aviones() {
         return count_aviones;
     }
