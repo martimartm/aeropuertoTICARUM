@@ -15,12 +15,11 @@ import com.ticarum.aeropuerto.repository.AerolineaRepository;
 
 
 @RestController
-@RequestMapping("/services")
+@RequestMapping("/{name}/services")
 public class AerolineaController {
 
     @Autowired
     private AerolineaRepository aerolineaRepository;
-
 
     @GetMapping("/info")
     public List<Aerolinea> getAllAerolineas(){

@@ -15,7 +15,7 @@ import com.ticarum.aeropuerto.model.Avion;
 
 
 @RestController
-@RequestMapping("/services")
+@RequestMapping("/{name}/services")
 public class AvionController {
 
     @Autowired
