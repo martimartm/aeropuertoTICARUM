@@ -1,4 +1,6 @@
 package com.ticarum.aeropuerto.model;
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -18,7 +20,22 @@ public class Vuelo{
     @JoinColumn(name = "idavion")
     private Avion avion;
 
-    public Vuelo(){}
+private LocalDateTime entrada;
+public LocalDateTime getEntrada() {
+    return entrada;
+}
+
+private LocalDateTime salida;
+
+    public LocalDateTime getSalida() {
+    return salida;
+}
+public void setSalida(LocalDateTime salida) {
+    this.salida = salida;
+}
+    public Vuelo(){
+        entrada= LocalDateTime.now();
+    }
     public Vuelo(Avion avion){
         this.avion=avion;
     }
