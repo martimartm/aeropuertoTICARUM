@@ -19,11 +19,16 @@ public class Vuelo{
     @ManyToOne
     @JoinColumn(name = "idavion")
     private Avion avion;
-
+  @Column(name = "entrada")
 private LocalDateTime entrada;
 public LocalDateTime getEntrada() {
     return entrada;
 }
+public void setEntrada(LocalDateTime entrada) {
+    this.entrada = entrada;
+}
+
+
 
 private LocalDateTime salida;
 
@@ -64,6 +69,7 @@ public void setSalida(LocalDateTime salida) {
     public void setAvion(Avion avion) {
         this.avion = avion;
     }
+    public void setCreatedDateTime(LocalDateTime now) {
+    }
 
-    
 }
