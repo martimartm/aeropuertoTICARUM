@@ -8,8 +8,8 @@ import org.hibernate.annotations.Formula;
 public class Aerolinea {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_aerolinea", nullable = false)
-    private Long id_aerolinea;
+    @Column(name="idaerolinea", nullable = false)
+    private Long idaerolinea;
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;
@@ -24,16 +24,16 @@ public class Aerolinea {
     }
 
     public Aerolinea (Long id_aerolinea, String name, Long count_aviones ){
-        this.id_aerolinea = id_aerolinea;
+        this.idaerolinea = id_aerolinea;
         this.name=name;
         this.count_aviones = count_aviones;
     }
 
     public Long getId_aerolinea() {
-        return id_aerolinea;
+        return idaerolinea;
     }
     public void setId_aerolinea(Long id_aerolinea) {
-        this.id_aerolinea = id_aerolinea;
+        this.idaerolinea = id_aerolinea;
     }
     public String getName_aerolinea() {
         return name;
@@ -46,5 +46,9 @@ public class Aerolinea {
         this.count_aviones = count_aviones;
     }
 
+    @Override
+	public String toString() {
+		return "Aerolinea [id=" + idaerolinea + ", name=" + name + ", aviones=" + count_aviones+"]";
+	}
     
 }
