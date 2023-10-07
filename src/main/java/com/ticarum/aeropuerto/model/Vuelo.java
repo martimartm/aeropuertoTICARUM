@@ -44,6 +44,11 @@ public void setSalida(LocalDateTime salida) {
     public Vuelo(Avion avion){
         this.avion=avion;
     }
+        public Vuelo(Avion avion, Aerolinea aerolinea){
+        this.avion=avion;
+        this.aerolinea = aerolinea;
+    }
+
 
     
     public Long getIdvuelo() {
