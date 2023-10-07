@@ -1,4 +1,9 @@
 package com.ticarum.aeropuerto.model;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -7,8 +12,8 @@ import jakarta.persistence.*;
 public class Avion{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_avion", nullable = false)
-    private Long id_avion;
+    @Column(name="idavion", nullable = false)
+    private Long idavion;
 
     @Column(name="modelo_avion", nullable = false)
     private String modelo_avion;
@@ -16,8 +21,10 @@ public class Avion{
     @Column(name="capacidad_avion", nullable = false)
     private Integer capacidad_avion;
 
-    @ManyToOne
-    @JoinColumn(name = "id_aerolinea", nullable=false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "aerolineaid", nullable=false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private Aerolinea aerolinea;
 
     
@@ -28,10 +35,10 @@ public class Avion{
         this.aerolinea = aerolinea;
     }
     public Long getId_avion() {
-        return id_avion;
+        return idavion;
     }
     public void setId_avion(Long id_avion) {
-        this.id_avion = id_avion;
+        this.idavion = id_avion;
     }
     public String getModelo_avion() {
         return modelo_avion;
@@ -48,7 +55,7 @@ public class Avion{
     public Aerolinea getAerolinea() {
         return aerolinea;
     }
-    public void setAerolinea(Aerolinea aerolinea) {
+    public void setAerolinea(Aerolinea aerolineaid) {
         this.aerolinea = aerolinea;
     }
 
