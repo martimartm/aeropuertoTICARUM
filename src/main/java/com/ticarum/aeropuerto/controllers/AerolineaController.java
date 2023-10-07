@@ -3,6 +3,7 @@ package com.ticarum.aeropuerto.controllers;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,10 +22,12 @@ public class AerolineaController {
     @Autowired
     private AerolineaRepository aerolineaRepository;
 
-    @GetMapping("/info")
-    public List<Aerolinea> getAllAerolineas(){
-        return aerolineaRepository.findAll();
-    }
+@GetMapping("/info")
+public ResponseEntity<List<Aerolinea>> getAllAerolineas() {
+    List<Aerolinea> aerolineas = aerolineaRepository.findAll();
+    HttpStatus status = aerolineas.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK;
+    return new ResponseEntity<>(aerolineas, status);
+}
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
