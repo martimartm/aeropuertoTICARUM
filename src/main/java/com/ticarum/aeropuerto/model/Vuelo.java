@@ -7,28 +7,29 @@ import jakarta.persistence.*;
 public class Vuelo{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_vuelo", nullable = false)
-    private Long id_vuelo;
+    @Column(name="idvuelo", nullable = false)
+    private Long idvuelo;
 
     @ManyToOne
-    @JoinColumn(name = "id_aerolinea")
+    @JoinColumn(name = "idaerolinea")
     private Aerolinea aerolinea;
 
     @ManyToOne
-    @JoinColumn(name = "id_avion")
+    @JoinColumn(name = "idavion")
     private Avion avion;
 
+    public Vuelo(){}
     public Vuelo(Avion avion){
         this.avion=avion;
     }
 
     
-    public Long getId_vuelo() {
-        return id_vuelo;
+    public Long getIdvuelo() {
+        return idvuelo;
     }
 
-    public void setId_vuelo(Long id_vuelo) {
-        this.id_vuelo = id_vuelo;
+    public void setIdvuelo(Long id_vuelo) {
+        this.idvuelo = id_vuelo;
     }
 
     public Aerolinea getAerolinea() {
