@@ -9,4 +9,5 @@ import com.ticarum.aeropuerto.model.Aerolinea;
 @Repository
 public interface AerolineaRepository extends JpaRepository<Aerolinea,Long>{
     List<Aerolinea> findByName(String name_aerolinea);
+    Aerolinea findByidaerolinea(Long id_aerolinea);
 }
