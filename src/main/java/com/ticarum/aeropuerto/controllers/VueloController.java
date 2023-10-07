@@ -1,6 +1,8 @@
 package com.ticarum.aeropuerto.controllers;
 
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +26,9 @@ public class VueloController {
     @Autowired
     private VueloRepository vueloRepository;
 
+
  //Usando una petición HTTP GET: Devolverá los datos del vuelo 
- //identificado por ID_VUELO   
+ //identificado por ID_VUELO 
  @GetMapping("/vuelo/{idvuelo}")
 public ResponseEntity<?> findById(@PathVariable("idvuelo") Long id_vuelo) {
     Optional<Vuelo> vuelo = vueloRepository.findById(id_vuelo);
@@ -56,4 +60,12 @@ public Vuelo updateVuelo(@PathVariable Long idvuelo ,@RequestBody Vuelo vuelo) {
 	return vueloRepository.save(vuelo);
 }
  
+//Usando una petición HTTP GET: Devolverá una lista con los vuelos pendientes de despegar del aeropuerto 
+@GetMapping("/vuelo")
+public ResponseEntity<List<Vuelo>> getVuelosPendientesDespegar() {
+    List<Vuelo> vuelosPendientes = vueloRepository.findVuelosPendientesByAerolinea("ticberia");
+    return new ResponseEntity<>(vuelosPendientes, HttpStatus.OK);
+}
+
+
 }
