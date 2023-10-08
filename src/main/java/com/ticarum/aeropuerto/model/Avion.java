@@ -55,7 +55,7 @@ public class Avion{
     public Aerolinea getAerolinea() {
         return aerolinea;
     }
-    public void setAerolinea(Aerolinea aerolineaid) {
+    public void setAerolinea(Aerolinea aerolinea) {
         this.aerolinea = aerolinea;
     }
 
