@@ -92,8 +92,8 @@ public Vuelo updateVuelo(@PathVariable Long idvuelo ,@RequestBody Vuelo vuelo) {
  
 //Usando una petición HTTP GET: Devolverá una lista con los vuelos pendientes de despegar del aeropuerto 
 @GetMapping("/vuelo")
-public ResponseEntity<List<Vuelo>> getVuelosPendientesDespegar() {
-    List<Vuelo> vuelosPendientes = vueloRepository.findVuelosPendientesByAerolinea("ticberia");
+public ResponseEntity<List<Vuelo>> getVuelosPendientesDespegar(@PathVariable("name") String name) {
+    List<Vuelo> vuelosPendientes = vueloRepository.findVuelosPendientesByAerolinea(name);
     return new ResponseEntity<>(vuelosPendientes, HttpStatus.OK);
 }
 
