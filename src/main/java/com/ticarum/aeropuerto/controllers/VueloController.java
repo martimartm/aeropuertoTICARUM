@@ -38,7 +38,7 @@ public class VueloController {
 
 //Crear un  nuevo vuelo
        @PostMapping("/vuelo")
-       public Vuelo crearAvion(@PathVariable("name") String name, @RequestBody Vuelo nuevoVuelo) {
+       public Vuelo crearVuelo(@PathVariable("name") String name, @RequestBody Vuelo nuevoVuelo) {
            
         Aerolinea aerolinea = aerolineaRepository.findByName(name);      
         if (aerolinea != null) {
