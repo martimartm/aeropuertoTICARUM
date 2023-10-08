@@ -19,9 +19,15 @@ public class Vuelo{
     @ManyToOne
     @JoinColumn(name = "idavion")
     private Avion avion;
-  @Column(name = "entrada")
-private LocalDateTime entrada;
-public LocalDateTime getEntrada() {
+    
+    @Column(name = "entrada")
+    private LocalDateTime entrada;
+
+    @Column(name = "salida")
+    private LocalDateTime salida;
+
+
+    public LocalDateTime getEntrada() {
     return entrada;
 }
 public void setEntrada(LocalDateTime entrada) {
@@ -29,8 +35,6 @@ public void setEntrada(LocalDateTime entrada) {
 }
 
 
-
-private LocalDateTime salida;
 
     public LocalDateTime getSalida() {
     return salida;
