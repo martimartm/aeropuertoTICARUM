@@ -1,6 +1,7 @@
 package com.ticarum.aeropuerto.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,4 +16,6 @@ public interface VueloRepository extends JpaRepository<Vuelo,Long>{
 
     @Query("select v from Vuelo v join v.aerolinea al where al.name = ?1 and v.salida < CURRENT_TIME")
     List<Vuelo> findDespeguesByAerolinea(String aerolineaName);
+
+    Optional<Vuelo> findById(Long id_vuelo);
 }

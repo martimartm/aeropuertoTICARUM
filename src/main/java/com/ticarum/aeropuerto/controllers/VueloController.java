@@ -1,6 +1,4 @@
 package com.ticarum.aeropuerto.controllers;
-
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -102,6 +100,34 @@ public ResponseEntity<List<Vuelo>> getVuelosPendientesDespegar(@PathVariable("na
 public ResponseEntity<List<Vuelo>> getVuelosHanSalido(@PathVariable("name") String name) {
     List<Vuelo> vuelosPendientes = vueloRepository.findDespeguesByAerolinea(name);
     return new ResponseEntity<>(vuelosPendientes, HttpStatus.OK);
+}
+
+
+//Usando una petición HTTP GET: Indicará si el vuelo ha salido ya o no y la hora de dicha salida
+@GetMapping("/vuelo/salida/{id_vuelo}")
+public ResponseEntity<?> booleanDespegue(@PathVariable("id_vuelo") Long id_vuelo) {
+
+    Optional<Vuelo> optionalVuelo = vueloRepository.findById(id_vuelo);
+
+       if(optionalVuelo.isPresent()){
+        Vuelo vuelo = optionalVuelo.get();
+        LocalDateTime salida = vuelo.getSalida();
+        LocalDateTime entrada = vuelo.getEntrada();
+
+            if(entrada.isAfter(salida)){
+
+                String mensaje = "Vuelo con ID " + id_vuelo + "  ha despegado. Su fecha de salida fue: "+ salida.toLocalDate() + " a las " + salida.getHour() + "horas.";
+                return new ResponseEntity<>(mensaje, HttpStatus.OK);
+
+            }else{
+                String mensaje = "Vuelo con ID " + id_vuelo + "  no ha despegado. Su fecha de salida es: "+ salida.toLocalDate() + " a las " + salida.getHour()+ "horas.";
+                return new ResponseEntity<>(mensaje, HttpStatus.OK);
+    
+            }
+       }  
+        else{String mensaje = "Vuelo con ID " + id_vuelo + " no encontrado.";
+       return new ResponseEntity<>(mensaje, HttpStatus.OK);
+    }
 }
 
 }
