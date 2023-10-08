@@ -97,5 +97,11 @@ public ResponseEntity<List<Vuelo>> getVuelosPendientesDespegar(@PathVariable("na
     return new ResponseEntity<>(vuelosPendientes, HttpStatus.OK);
 }
 
+// Usando una petición HTTP GET: Devolverá una lista con los aviones que han salido ya del aeropuerto
+@GetMapping("/vuelo/salida")
+public ResponseEntity<List<Vuelo>> getVuelosHanSalido(@PathVariable("name") String name) {
+    List<Vuelo> vuelosPendientes = vueloRepository.findDespeguesByAerolinea(name);
+    return new ResponseEntity<>(vuelosPendientes, HttpStatus.OK);
+}
 
 }
