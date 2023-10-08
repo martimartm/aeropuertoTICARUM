@@ -16,7 +16,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.ticarum.aeropuerto.exception.ResourceNotFoundException;
+import com.ticarum.aeropuerto.model.Aerolinea;
+import com.ticarum.aeropuerto.model.Avion;
 import com.ticarum.aeropuerto.model.Vuelo;
+import com.ticarum.aeropuerto.repository.AerolineaRepository;
+import com.ticarum.aeropuerto.repository.AvionRepository;
 import com.ticarum.aeropuerto.repository.VueloRepository;
 
 @RestController
@@ -25,7 +31,31 @@ public class VueloController {
 
     @Autowired
     private VueloRepository vueloRepository;
+    @Autowired
+    private AerolineaRepository aerolineaRepository;
+        @Autowired
+    private AvionRepository avionRepository;
 
+//Crear un  nuevo vuelo
+       @PostMapping("/vuelo")
+       public Vuelo crearAvion(@PathVariable("name") String name, @RequestBody Vuelo nuevoVuelo) {
+           
+        Aerolinea aerolinea = aerolineaRepository.findByName(name);      
+        if (aerolinea != null) {
+           nuevoVuelo.setAerolinea(aerolinea);
+           nuevoVuelo.setEntrada(LocalDateTime.now());
+            nuevoVuelo.setSalida(nuevoVuelo.getSalida());
+
+            Avion avion = nuevoVuelo.getAvion();
+            nuevoVuelo.setAvion(avion);
+
+            nuevoVuelo = vueloRepository.save(nuevoVuelo);
+            return nuevoVuelo ;
+
+           } else {
+               throw new ResourceNotFoundException("Aerolinea no encontrada");
+           }
+       }
 
  //Usando una petición HTTP GET: Devolverá los datos del vuelo 
  //identificado por ID_VUELO 
