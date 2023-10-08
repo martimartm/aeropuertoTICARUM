@@ -21,18 +21,21 @@ public class AerolineaController {
 
     @Autowired
     private AerolineaRepository aerolineaRepository;
-
-@GetMapping("/info")
-public ResponseEntity<List<Aerolinea>> getAllAerolineas() {
-    List<Aerolinea> aerolineas = aerolineaRepository.findAll();
-    HttpStatus status = aerolineas.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK;
-    return new ResponseEntity<>(aerolineas, status);
-}
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Aerolinea createAerolinea(@RequestBody Aerolinea aerolinea){
-        return aerolineaRepository.save(aerolinea);
+    @GetMapping("/info")
+    public ResponseEntity<List<Aerolinea>> getAllAerolineas() {
+        List<Aerolinea> aerolineas = aerolineaRepository.findAll();
+        HttpStatus status = aerolineas.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK;
+        return new ResponseEntity<>(aerolineas, status);
     }
- 
+
+    @PostMapping("/info")
+    @ResponseStatus(HttpStatus.CREATED)
+	public ResponseEntity<Aerolinea> createAerolinea(@RequestBody Aerolinea aerolinea) {
+		try {
+			Aerolinea newAerolinea = aerolineaRepository.save(new Aerolinea(aerolinea.getName()));
+			return new ResponseEntity<>(newAerolinea, HttpStatus.CREATED);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }
