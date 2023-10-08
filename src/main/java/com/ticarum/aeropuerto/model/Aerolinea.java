@@ -15,12 +15,11 @@ public class Aerolinea {
     private String name;
 
     @Column
-    @Formula("SELECT COUNT(*) FROM Avion WHERE id_aerolinea = id_aerolinea")
+    @Formula("SELECT COUNT(*) FROM Avion WHERE id_aerolinea = aerolineaid")
     private Long count_aviones;
 
 
     public Aerolinea(){
-
     }
 
     public Aerolinea (Long id_aerolinea, String name, Long count_aviones ){
@@ -29,13 +28,17 @@ public class Aerolinea {
         this.count_aviones = count_aviones;
     }
 
+    public Aerolinea ( String name ){
+    this.name=name;
+    }
+
     public Long getId_aerolinea() {
         return idaerolinea;
     }
     public void setId_aerolinea(Long id_aerolinea) {
         this.idaerolinea = id_aerolinea;
     }
-    public String getName_aerolinea() {
+    public String getName() {
         return name;
     }
 
